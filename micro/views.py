@@ -41,3 +41,13 @@ class AllDataView(APIView):
         if serializer_data:
             return Response(serializer_data.data, status=status.HTTP_202_ACCEPTED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+class SolDataView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, format='json'):
+        queryset = Solution.objects.all()
+        serializer_data = SolutionSerializer(queryset,many=True)
+        if serializer_data:
+            return Response(serializer_data.data, status=status.HTTP_202_ACCEPTED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)

@@ -7,7 +7,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         
         model = Product
-        fields = ('id','prod_name','prod_img','prod_spec','prod_desc','prod_subcategory','prod_price','prod_date')
+        fields = ('id','prod_name','prod_img','prod_spec','prod_desc','prod_subcategory','prod_price','prod_date','public_id')
 
 
 class SubCategorySerializer(serializers.ModelSerializer):
@@ -16,7 +16,7 @@ class SubCategorySerializer(serializers.ModelSerializer):
     class Meta:
         
         model = SubCategory
-        fields = ('id','title','description','subcat_img','category','prod_data')
+        fields = ('id','title','description','subcat_img','category','prod_data','public_id')
 
     def get_prod_data(self, obj):
         prods_list = Product.objects.filter(prod_subcategory__id=obj.id)
@@ -29,7 +29,7 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         
         model = Category
-        fields = ('id','title','description','cat_img','subcat_data')
+        fields = ('id','title','description','cat_img','subcat_data','public_id')
 
     def get_subcat_data(self, obj):
         subcat_list = SubCategory.objects.filter(category__id=obj.id)
@@ -42,4 +42,4 @@ class SolutionSerializer(serializers.ModelSerializer):
     class Meta:
         
         model = Solution
-        fields = ('id','title','description','sol_img','spec_img')
+        fields = ('id','title','description','sol_img','spec_img','public_id')
