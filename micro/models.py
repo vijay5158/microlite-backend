@@ -43,7 +43,7 @@ class SubCategory(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=1000,null=True,blank=True)
     subcat_img = models.ImageField(upload_to='static/subcategory', default="")
-    category =  models.ForeignKey(Category, on_delete=models.CASCADE,default="")
+    category =  models.ForeignKey(Category, on_delete=models.CASCADE,default="", related_name='subcat_data')
 
     def __str__(self) -> str:
         return self.title
@@ -65,7 +65,7 @@ class Product(models.Model):
     prod_manual = models.FileField(upload_to='static/manual', default="",null=True,blank=True)
     prod_brocher = models.FileField(upload_to='static/brocher', default="",null=True,blank=True)
     prod_desc = models.CharField(max_length=1000,null=True,blank=True)
-    prod_subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE,default="")
+    prod_subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE,default="", related_name='prod_data')
     prod_price = models.IntegerField(default=0,null=True,blank=True)
     prod_date = models.DateField(auto_now_add=True)
 
